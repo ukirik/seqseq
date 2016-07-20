@@ -8,12 +8,28 @@
 
 FOLDER="."
 OUTFILE="seqtable.out"
-PYSCRIPT="pairedseqread.py"  # change this line to "pairedseqread_3.py" when running Python3
+PY2SCRIPT="pairedseqread.py"
+PY3SCRIPT="pairedseqread_3.py"
 STATFILE="readstats.txt"
 CFGFILE="confg.yaml"
 
-# change to "bz2" depending on the compression of the sequence files
-COMP="gz" 	
+COMP="gz" 	# change to "bz2" depending on the compression of the sequence files
+
+if command -v python > /dev/null 2>&1;
+then
+	PYV="$(python -c 'import platform; x,y,z=platform.python_version_tuple();print(x)')"
+    if [[ "$PYV" -lt 3 ]]
+	then
+		echo "Python2 found..."
+		PYSCRIPT="$PY2SCRIPT"
+	else
+		echo "Python3 found..."
+		PYSCRIPT="$PY3SCRIPT"
+	fi
+else
+    echo ERROR: Python not installed 1>&2
+    exit 1
+fi
 
 pairedread(){
 
@@ -24,6 +40,8 @@ pairedread(){
 		echo "Looking for paired read files in \"$1\""
 		FOLDER="$1"
 	fi
+	
+	
 
 	echo "Dataset_folder"$'\t'"all_seqs"$'\t'"low-Q"$'\t'"SC_seqs"$'\t'"filtered"$'\t'"distinct" $'\t'"promille"> "${STATFILE}"
 	for f in "$FOLDER"/*_1.fastq."$COMP"
