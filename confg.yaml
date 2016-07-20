@@ -1,0 +1,40 @@
+### This file hold runtime configuration for the scFv sequence parsing script
+### Blocks are annotated with comments for convenience
+##################################################################
+# Trimming sequences, ranges given in nucleotide indices
+# A single value refers to a start index to the end, two values indicate start and stop coordinates
+Trim:
+    fwdread: [27,null]
+    revread: [21,150]
+##################################################################
+# CDR regions, given as [DIRECTION, START, STOP] 
+# start and stop values are given in nucleotide indices INCLUDING +-1 AA (3 bp) margins
+# Add/remove regions as necessary, default values are based on test data
+Regions:
+    cdrh1: [5,0,30]
+    cdrh2: [5,69,99]
+    cdrh3: [5,207,261]
+    cdrl3: [3,99,129]
+##################################################################
+# Quality control settings
+# Alternative values for "filtering" are "cdr", "combi" or "ave" (see documentation)
+# In case of typos or invalid values, filtering method defaults to average quality filtering
+Quality:
+    threshold: 20
+    filtering: cdr
+##################################################################
+# Stitching the paired reads
+# Linker string is used to join the ends 5'-3'
+# Anchors are short strings to which the linker will be attached; 
+# they are expected to be immediately connected  to the linker
+Stitching:
+    linker:   <...>
+    f_anchor: <...>
+    r_anchor: <...>
+##################################################################
+# Sample IDs, in the same (alphabetic) order folders are listed
+Samples:
+    <Folder1 name>: <Sample1 Label>
+    <Folder2 name>: <Sample2 Label>
+    <Folder3 name>: <Sample3 Label>
+    
