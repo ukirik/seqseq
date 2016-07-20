@@ -8,7 +8,7 @@
 
 FOLDER="."
 OUTFILE="seqtable.out"
-PYSCRIPT="pairedseqread_cf.py"
+PYSCRIPT="pairedseqread.py"
 STATFILE="readstats.txt"
 CFGFILE="confg.yaml"
 
