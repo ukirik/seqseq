@@ -8,7 +8,7 @@
 
 FOLDER="."
 OUTFILE="seqtable.out"
-PYSCRIPT="pairedseqread.py"
+PYSCRIPT="pairedseqread.py"  # change this line to "pairedseqread_3.py" when running Python3
 STATFILE="readstats.txt"
 CFGFILE="confg.yaml"
 
