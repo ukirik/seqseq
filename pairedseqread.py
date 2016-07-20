@@ -207,6 +207,17 @@ def paired_read(read1, read2, nbrofitems = 10**8, fileout = None):
             if args.config is not None:
                 i = str(aa1).rfind(cfg["Stitching"]["f_anchor"])
                 j = str(aa2).find(cfg["Stitching"]["r_anchor"])
+                
+                # Check whether or not stitching is done in the expected place
+                # TODO: this should be done in a more graceful way
+                if i < len(str(aa1)) * 0.75:
+                    print("Warning: linker anchor on VH side not found where it was expected (i = {})".format(i))
+                    print("read1: {} (i = {})".format(str(aa1), i))
+
+                if j > len(str(aa2)) * 0.25:
+                    print("Warning: linker anchor on VL side not found where it was expected (j = {})".format(j))
+                    print("read2: {} (j = {})".format(str(aa2),j))
+                    
             else:
                 i = None
                 j = None
